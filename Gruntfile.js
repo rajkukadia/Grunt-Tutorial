@@ -7,10 +7,15 @@ module.exports = function(grunt){ /* -> 'grunt' parameter gives access to grunt 
         greeting: 'Welcome',
         pkg: grunt.file.readJSON('package.json'),
         age: 'I am <%= 5 + 5 %>', /* -> Used Javascript code inside <%=  %> */
-        today: 'today is <%= grunt.template.today("yyyy-mm-dd")%>'
+        today: 'today is <%= grunt.template.today("yyyy-mm-dd")%>',
+
+        jshint:{
+            all : ['src/*.js']   /*  -> file location used by grunt-contrib-jshint to validate */
+        }
+
     });
 
-    //3 params: name, desc, to do function
+    /* -> 3 params: name, description and function defining the actual task */
     grunt.registerTask('greet', 'greet the user', function(){
         console.log('Grunt is running!'); /* -> command -> grunt greet -> it will display grunt is running */
         console.log(grunt.config('greeting'));
@@ -26,7 +31,12 @@ module.exports = function(grunt){ /* -> 'grunt' parameter gives access to grunt 
                                                         */
     })
 
-    grunt.registerTask('default', ['greet', 'work:Joe:2 minutes']); /*  -> use 'default' task name to run grunt without passing any command line arguments
+    grunt.loadNpmTasks('grunt-contrib-jshint');  /*  -> Adding external task
+                                                     -> This method is used to load predefined tasks from https://gruntjs.com/plugins (npm i grunt-contrib-jshint --save-dev)
+                                                     -> To register this task, use name 'jshint'
+                                                  */
+
+    grunt.registerTask('default', ['greet', 'work:Joe:2 minutes', 'jshint']); /*  -> use 'default' task name to run grunt without passing any command line arguments
                                                                         -> It runs all the task names mentioned in sequence in the array
                                                                         -> command -> grunt
                                                                     */
