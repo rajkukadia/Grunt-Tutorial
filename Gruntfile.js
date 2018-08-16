@@ -13,6 +13,33 @@ module.exports = function(grunt){ /* -> 'grunt' parameter gives access to grunt 
             all : ['src/*.js']   /*  -> file location used by grunt-contrib-jshint to validate */
         }
 
+     // jshint: {             /* -> command -> grunt jshint:server -> executes only server
+     //                         -> Having client and server with different options makes sure that the multitasking is handled individually
+     //                         -> command -> grunt jshint:client -> executes only client
+     //                               */
+     //        client:{
+     //            options:{
+     //                browser: true,
+     //                globals: {
+     //                    jQuery: true
+     //                }
+     //            },
+     //            src: ['client/js/**/*.js']
+     //        },
+     //      server: {
+     //            options:{
+     //                node:true
+     //            },
+     //            src: 'server/**/*.js'
+     //      }
+     //    },
+     //
+     //    jasmine: {
+     //        sources:{
+     //            src: 'client/'
+     //        }  /*  -> config used by grunt-contrib-jasmine  */
+     //    }
+     //
     });
 
     /* -> 3 params: name, description and function defining the actual task */
@@ -35,6 +62,8 @@ module.exports = function(grunt){ /* -> 'grunt' parameter gives access to grunt 
                                                      -> This method is used to load predefined tasks from https://gruntjs.com/plugins (npm i grunt-contrib-jshint --save-dev)
                                                      -> To register this task, use name 'jshint'
                                                   */
+
+    //grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.registerTask('default', ['greet', 'work:Joe:2 minutes', 'jshint']); /*  -> use 'default' task name to run grunt without passing any command line arguments
                                                                         -> It runs all the task names mentioned in sequence in the array
